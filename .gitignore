@@ -1,0 +1,12 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+.idea/
+conversations/
+advisor.db
+advisor.db-wal
+advisor.db-shm
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/

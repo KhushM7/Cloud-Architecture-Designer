@@ -1,0 +1,1991 @@
+/* ============================================================
+   Architecture Advisor
+   The design tokens live in the `:root` block below. That block is the one
+   place to edit to re-skin the application -- see the note above it.
+   ============================================================ */
+
+/* ---- Fonts ----
+   IBM Plex Sans Condensed (titles Bold 700, body Light 300) and IBM Plex Mono.
+   Self-hosted, latin + latin-ext subsets only,
+   so the app renders correctly with no network access. Only the weights the app
+   actually asks for are declared, so no file is fetched and never used.
+-------------------------------------------------------------- */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(assets/fonts/ibm-plex-mono-400-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(assets/fonts/ibm-plex-mono-400-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'IBM Plex Sans Condensed';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(assets/fonts/ibm-plex-sans-condensed-300-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'IBM Plex Sans Condensed';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(assets/fonts/ibm-plex-sans-condensed-300-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'IBM Plex Sans Condensed';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(assets/fonts/ibm-plex-sans-condensed-400-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'IBM Plex Sans Condensed';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(assets/fonts/ibm-plex-sans-condensed-400-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'IBM Plex Sans Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(assets/fonts/ibm-plex-sans-condensed-600-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'IBM Plex Sans Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(assets/fonts/ibm-plex-sans-condensed-600-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'IBM Plex Sans Condensed';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(assets/fonts/ibm-plex-sans-condensed-700-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'IBM Plex Sans Condensed';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(assets/fonts/ibm-plex-sans-condensed-700-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* ---- The palette is not here ----
+   Every `--cs-*` colour this file reads is defined in branding.py and served
+   as /brand.css, which index.html links immediately before this stylesheet.
+   Four values there set the whole scheme; the rest are worked out from them.
+
+   That is also why static/app.js no longer names any colour: it reads the same
+   custom properties back off the document for the diagram, and export.py
+   imports them for the PDF. One definition, three consumers, no copies.
+
+   To re-skin the app, edit branding.py and refresh. Nothing here needs
+   touching. What this block still owns is type, easing and layout, none of
+   which is brand.
+
+   Two caveats worth knowing when reading the rest of the file. The whites
+   below -- `#fff` and `rgba(255,255,255,a)` on the dark sidebar -- are
+   foregrounds on a dark ground rather than brand colours, so they stay
+   literal. So do the alpha tints of the semantic colours
+   (`rgba(31,157,85,a)` green, `rgba(217,119,6,a)` amber,
+   `rgba(192,57,43,a)` red): those three say what state something is in and
+   branding.py deliberately does not let a brand recolour them.
+-------------------------------------------------------------- */
+:root {
+  --cs-font: 'IBM Plex Sans Condensed', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --cs-font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --cs-ease: cubic-bezier(.2, .8, .2, 1);
+
+  /* Layout: the grey margin around the app card, equal on all four edges, and
+     the paddings and display sizes that scale with the viewport so the card
+     still reads correctly once it fills a large screen. */
+  --cs-frame: clamp(14px, 1.8vmin, 30px);
+  --cs-shell-radius: 14px;
+  --cs-gutter: clamp(22px, 2.6vw, 52px);
+  --cs-stack: clamp(20px, 2.2vh, 32px);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--cs-canvas);
+  font-family: var(--cs-font);
+  color: var(--cs-ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: var(--cs-accent);
+  text-decoration: underline;
+  text-decoration-color: var(--cs-line-strong);
+  text-underline-offset: 4px;
+  transition: color 140ms ease, text-decoration-color 140ms ease;
+}
+a:hover { color: var(--cs-primary); text-decoration-color: var(--cs-primary); }
+
+:focus-visible { outline: none; box-shadow: var(--cs-focus-ring); }
+
+.eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cs-ink-3);
+}
+.eyebrow--primary { color: var(--cs-primary-soft); }
+.eyebrow--tight { letter-spacing: 0.08em; }
+.eyebrow--on-primary { color: rgba(255, 255, 255, 0.8); }
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ============================================================
+   Shell
+   ============================================================ */
+
+/* The card fills the viewport bar an equal margin on all four edges, and is
+   centred in both axes. Because its height is pinned to the viewport, the
+   conversation scrolls inside the card rather than scrolling the page, so the
+   frame and the composer stay put. */
+.page {
+  padding: var(--cs-frame);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+.shell {
+  width: 100%;
+  height: calc(100vh - 2 * var(--cs-frame));
+  height: calc(100dvh - 2 * var(--cs-frame));
+  /* On a very short viewport, stop shrinking and let the page scroll instead.
+     Low enough that a laptop window keeps its equal margins. */
+  min-height: 560px;
+  background: var(--cs-surface);
+  border: 1px solid var(--cs-line);
+  border-radius: var(--cs-shell-radius);
+  box-shadow: var(--cs-shadow-lg);
+  overflow: hidden;
+  display: flex;
+}
+
+/* ============================================================
+   Sidebar
+   ============================================================ */
+
+.sidebar {
+  /* Grows a little with the card so it does not look like a sliver on a wide
+     screen, but never enough to crowd the conversation. */
+  flex: 0 0 clamp(268px, 19vw, 340px);
+  /* Without this the full-width logo's intrinsic size can push the automatic
+     minimum size past the basis and widen the whole sidebar. */
+  min-width: 0;
+  /* Lets the saved list's own scroll area absorb the overflow instead of the
+     sidebar growing past the card. */
+  min-height: 0;
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--cs-secondary) 0%, var(--cs-secondary-soft) 100%);
+  padding: clamp(20px, 2.4vh, 32px) clamp(18px, 1.4vw, 26px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--cs-stack);
+}
+
+/* Fills the width of the sidebar, sitting at the top and horizontally centred. */
+.sidebar__logo {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+  align-self: center;
+}
+
+.sidebar__section > .eyebrow { display: block; margin-bottom: 12px; }
+
+/* "This session" holds exactly one row, so it never grows and never pushes the
+   buttons below it out of the sidebar. */
+.sidebar__section--single { flex: 0 0 auto; }
+
+/* The saved list absorbs every spare pixel in the sidebar and scrolls inside,
+   which is what keeps the three buttons sitting directly above the footer rule
+   instead of floating in the middle with a gap under them.
+ *
+ * No max-height: capping it left exactly that gap. It cannot push the buttons off
+ * the bottom either way, because the overflow is its own to deal with -- that was
+ * "This session" growing a row per conversation, which now holds one.
+ *
+ * The floor is about six rows, raised from three when the footer disclaimer came
+ * out: that freed a block of the sidebar, and a list of saved work is a better
+ * use of it than white space above the buttons. */
+.sidebar__section--scroll {
+  flex: 1 1 auto;
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+}
+.sidebar__section--scroll .sessions {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding-right: 2px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.28) transparent;
+}
+.sidebar__section--scroll .sessions::-webkit-scrollbar { width: 6px; }
+.sidebar__section--scroll .sessions::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.24);
+  border-radius: 999px;
+}
+
+.sessions { display: flex; flex-direction: column; gap: 8px; }
+
+.session {
+  position: relative;
+  padding: 11px 13px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background: transparent;
+  text-align: left;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 180ms var(--cs-ease);
+}
+.session:hover { background: rgba(255, 255, 255, 0.06); }
+.session.is-active {
+  background: rgba(255, 255, 255, 0.10);
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+/* ---- Saved conversations ---- */
+
+.saved-item { display: flex; align-items: flex-start; gap: 4px; }
+.saved-item .session { flex: 1 1 auto; min-width: 0; }
+/* Two lines of title, then an ellipsis. Better than wrapping to four and pushing
+   the next conversation off the bottom of the list. */
+.saved-item .session__title {
+  overflow-wrap: anywhere;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.session__badge {
+  display: inline-block;
+  margin-left: 6px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--cs-primary-soft);
+  border: 1px solid var(--cs-on-dark-line);
+  border-radius: 999px;
+  padding: 0 5px;
+  vertical-align: 1px;
+}
+
+.icon-btn {
+  flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 180ms var(--cs-ease), color 180ms var(--cs-ease),
+              border-color 180ms var(--cs-ease);
+}
+.icon-btn svg { width: 13px; height: 13px; display: block; }
+.saved-item:hover .icon-btn, .icon-btn:focus-visible { opacity: 1; }
+.icon-btn:hover { color: #FFFFFF; border-color: rgba(255, 255, 255, 0.32); }
+.icon-btn--danger:hover { color: #FF7B6B; border-color: rgba(255, 123, 107, 0.45); }
+
+/* Stacked rather than in a row. Three 26px buttons side by side took about 80px
+   out of a 290px sidebar and were invisible until hover, so the space was being
+   held for nothing and every saved title wrapped onto three lines. In a column
+   they cost 22px, and the title gets the rest. */
+.saved-item__tools {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding-top: 6px;
+}
+
+/* Two-step delete, so a stray click cannot remove a file from disk. */
+.confirm {
+  flex: 1;
+  min-width: 0;
+  padding: 11px 13px;
+  border-radius: 8px;
+  background: rgba(192, 57, 43, 0.18);
+  border: 1px solid rgba(192, 57, 43, 0.5);
+}
+.confirm__text {
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.4;
+  color: #FFFFFF;
+  overflow-wrap: anywhere;
+  margin-bottom: 9px;
+}
+.confirm__actions { display: flex; gap: 6px; }
+
+.mini {
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 5px 12px;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  background: transparent;
+  color: #FFFFFF;
+  transition: background 180ms var(--cs-ease), border-color 180ms var(--cs-ease);
+}
+.mini:hover { border-color: #FFFFFF; }
+.mini--danger { background: var(--cs-danger); border-color: var(--cs-danger); }
+.mini--danger:hover { background: #A93226; border-color: #A93226; }
+
+.rename {
+  flex: 1;
+  min-width: 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--cs-primary);
+  background: rgba(255, 255, 255, 0.10);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: #FFFFFF;
+}
+.rename:focus { outline: none; box-shadow: var(--cs-focus-ring); }
+
+/* The saved-conversation search and its filters (F8). The input reuses .rename,
+   which is already styled for the dark sidebar; these are the differences. */
+.search {
+  width: 100%;
+  margin: 10px 0 8px;
+  font-weight: 400;
+  border-color: rgba(255, 255, 255, 0.22);
+}
+.search::placeholder { color: rgba(255, 255, 255, 0.45); }
+.search:focus { border-color: var(--cs-primary); }
+
+.filters { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+.filters:empty { display: none; }
+.filter {
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 3px 9px;
+  border-radius: 999px;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+.filter:hover { color: #FFFFFF; border-color: var(--cs-primary); }
+.filter.is-on {
+  color: #FFFFFF;
+  background: var(--cs-primary);
+  border-color: var(--cs-primary);
+}
+.filter--clear { color: rgba(255, 255, 255, 0.5); border-style: dashed; }
+
+/* Tags: what somebody called a conversation, as against what was read off it. */
+.tags { display: flex; flex-wrap: wrap; gap: 5px; padding: 0 4px 8px; }
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 999px;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+}
+.tag:hover { color: #FFFFFF; border-color: var(--cs-primary); }
+.tag__x { font-size: 13px; line-height: 1; opacity: 0.6; }
+.tag-input { font-size: 12px; font-weight: 400; padding: 5px 9px; }
+
+.session__title {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.82);
+}
+.session.is-active .session__title { font-weight: 600; color: #FFFFFF; }
+
+.session__meta {
+  margin-top: 3px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.45);
+}
+.session.is-active .session__meta { color: rgba(255, 255, 255, 0.55); }
+
+/* What this conversation has cost, on the row it belongs to rather than in a box
+   of its own: a running figure per session is the useful one, and a single total
+   across every session never was. */
+.session__cost {
+  flex: 0 0 auto;
+  font-family: var(--cs-font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: rgba(255, 255, 255, 0.72);
+}
+.session.is-active .session__cost { color: #FFFFFF; }
+
+/* The spend tables (F14). Tabular figures for the same reason .session__cost has
+   them: a column of money that does not line up cannot be read down. */
+.spend__months {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+.spend__month {
+  font-family: var(--cs-font-mono);
+  font-size: 14px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.spend {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 4px 0 12px;
+  font-size: 13px;
+}
+.spend th,
+.spend td {
+  padding: 5px 8px;
+  text-align: right;
+  border-bottom: 1px solid var(--cs-line);
+}
+.spend th[scope='row'],
+.spend thead th:first-child {
+  text-align: left;
+  font-weight: 400;
+}
+.spend thead th {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--cs-secondary);
+}
+.spend td {
+  font-family: var(--cs-font-mono);
+  font-variant-numeric: tabular-nums;
+}
+.spend__total th,
+.spend__total td {
+  font-weight: 700;
+  border-bottom: none;
+}
+
+/* Unsaved work, marked where the eye already is rather than in another panel. */
+.session__dot {
+  margin-left: 5px;
+  color: var(--cs-primary);
+  font-size: 15px;
+  line-height: 1;
+  vertical-align: 1px;
+}
+
+/* Rebuilding the architecture. Its own row above the cheap questions, so the
+   expensive action does not sit in a line of casual ones. */
+
+/* The architecture on screen was built to a region and a regime that have since
+   been changed. Amber rather than red: nothing has gone wrong, and the answer on
+   screen is still a real answer -- it is just out of date and saying so. */
+.stale {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  margin-bottom: var(--cs-stack);
+  border: 1px solid rgba(217, 119, 6, 0.4);
+  border-radius: 10px;
+  background: rgba(217, 119, 6, 0.06);
+}
+.stale__mark {
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: #FFFFFF;
+  background: var(--cs-warning);
+}
+.stale__text {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--cs-ink-2);
+}
+.stale__text strong { font-weight: 600; color: var(--cs-ink); }
+.stale .btn { flex: 0 0 auto; }
+
+.sidebar__empty {
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* The three buttons sit on the bottom edge, and `margin-top: auto` is what puts
+   them there -- the footer used to carry that and the buttons floated above it.
+   Everything spare goes to the saved list instead. */
+.sidebar__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: auto;
+  flex: 0 0 auto;
+}
+
+.saved {
+  padding: 13px;
+  border-radius: 10px;
+  background: rgba(31, 157, 85, 0.16);
+  border: 1px solid rgba(31, 157, 85, 0.4);
+}
+.saved__title { font-size: 13px; font-weight: 600; color: #FFFFFF; margin-bottom: 3px; }
+.saved__path {
+  font-family: var(--cs-font-mono);
+  font-size: 11px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.5;
+  word-break: break-all;
+}
+
+
+/* ============================================================
+   Buttons
+   ============================================================ */
+
+.btn {
+  font-family: inherit;
+  border-radius: 999px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background 220ms var(--cs-ease), transform 220ms var(--cs-ease),
+              border-color 220ms var(--cs-ease), color 220ms var(--cs-ease);
+}
+.btn:disabled { opacity: 0.55; cursor: not-allowed; }
+
+.btn--primary { background: var(--cs-primary); color: #fff; font-weight: 700; }
+.btn--primary:hover:not(:disabled) { background: var(--cs-primary-ink); transform: translateY(-1px); }
+
+.btn--dark { background: var(--cs-secondary); color: #fff; font-weight: 700; }
+.btn--dark:hover:not(:disabled) { background: var(--cs-secondary-soft); transform: translateY(-1px); }
+
+/* The same shape on a light ground, which the export dialog needs for Cancel. */
+.btn--ghost {
+  background: transparent;
+  color: var(--cs-ink-2);
+  font-weight: 300;
+  border-color: var(--cs-line-strong);
+}
+.btn--ghost:hover:not(:disabled) { border-color: var(--cs-ink-2); }
+
+.btn--ghost-light {
+  background: transparent;
+  color: #FFFFFF;
+  font-weight: 300;
+  border-color: rgba(255, 255, 255, 0.32);
+}
+.btn--ghost-light:hover:not(:disabled) { border-color: #FFFFFF; }
+
+.btn--block { width: 100%; }
+.btn--sm { font-size: 14px; padding: 11px 18px; }
+.btn--md { font-size: 15px; padding: 12px 24px; }
+.btn--lg { font-size: 15px; padding: 14px 26px; }
+.btn--alert { font-size: 14px; padding: 10px 20px; }
+
+/* ============================================================
+   Main column
+   ============================================================ */
+
+.main {
+  flex: 1;
+  min-width: 0;
+  /* Required so .view can scroll rather than stretching the card. */
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--cs-surface);
+}
+
+.topbar {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 18px var(--cs-gutter);
+  border-bottom: 1px solid var(--cs-line);
+}
+
+.tabs { display: flex; gap: 4px; }
+
+.tab {
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 300;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 8px 4px;
+  margin-right: 20px;
+  color: var(--cs-ink-3);
+  border-bottom: 2px solid transparent;
+  transition: color 180ms var(--cs-ease), border-color 180ms var(--cs-ease);
+}
+.tab:hover { color: var(--cs-ink-2); }
+.tab.is-active { color: var(--cs-ink); font-weight: 600; border-bottom-color: var(--cs-primary); }
+
+.topbar__meta { display: flex; align-items: center; gap: 14px; }
+.topbar__model { font-size: 13px; font-weight: 300; color: var(--cs-ink-3); }
+
+.avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  background: var(--cs-accent-soft);
+  border: 1px solid var(--cs-line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--cs-ink-2);
+}
+
+.view {
+  /* No bottom padding: the composer supplies it, so it can sit flush against
+     the bottom of the card without a gap opening under it when it sticks. */
+  padding: var(--cs-stack) var(--cs-gutter) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--cs-stack);
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--cs-line-strong) transparent;
+}
+.view::-webkit-scrollbar { width: 10px; }
+.view::-webkit-scrollbar-thumb {
+  background: var(--cs-line-strong);
+  border: 3px solid var(--cs-surface);
+  border-radius: 999px;
+}
+.view--compare { gap: 24px; padding-bottom: var(--cs-stack); }
+.view[hidden] { display: none; }
+
+/* ============================================================
+   Welcome state
+   ============================================================ */
+
+.welcome {
+  border-radius: 12px;
+  background: var(--cs-grad-secondary);
+  padding: clamp(30px, 3.6vh, 54px) clamp(26px, 2.8vw, 58px);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(18px, 1.8vh, 26px);
+}
+.welcome__title {
+  font-size: clamp(32px, 3.2vw, 54px);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: #FFFFFF;
+  margin: 0;
+}
+.welcome__title em { font-style: normal; color: var(--cs-primary); }
+.welcome__lead {
+  font-size: clamp(17px, 1.2vw, 23px);
+  font-weight: 300;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.78);
+  margin: 0;
+  max-width: 56ch;
+}
+.welcome__stats { display: flex; gap: clamp(28px, 3vw, 56px); flex-wrap: wrap; }
+.welcome__stat-value {
+  font-size: clamp(26px, 2vw, 38px);
+  font-weight: 700;
+  color: #FFFFFF;
+  line-height: 1.1;
+}
+.welcome__stat-label { font-size: 13px; font-weight: 300; color: rgba(255, 255, 255, 0.6); }
+
+.examples { display: flex; flex-direction: column; gap: 10px; }
+.examples > .eyebrow { margin-bottom: 2px; }
+
+.example {
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.6;
+  text-align: left;
+  color: var(--cs-ink);
+  background: var(--cs-surface);
+  border: 1px solid var(--cs-line);
+  border-radius: 10px;
+  padding: 14px 18px;
+  cursor: pointer;
+  transition: border-color 200ms var(--cs-ease), background 200ms var(--cs-ease),
+              transform 200ms var(--cs-ease);
+}
+.example:hover {
+  border-color: var(--cs-primary);
+  background: var(--cs-surface-3);
+  transform: translateY(-1px);
+}
+
+/* ============================================================
+   Conversation
+   ============================================================ */
+
+.thread { display: flex; flex-direction: column; gap: 26px; }
+
+.msg { display: flex; gap: 14px; align-items: flex-start; }
+.msg__avatar { flex: 0 0 30px; }
+.msg__mark { flex: 0 0 30px; width: 30px; height: 30px; object-fit: contain; margin-top: 2px; }
+
+.bubble {
+  flex: 1;
+  background: var(--cs-accent-soft);
+  border-radius: 10px;
+  padding: 16px 20px;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--cs-ink);
+}
+
+.reply { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 26px; }
+
+.context {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 12px 16px;
+  border: 1px solid var(--cs-line);
+  border-radius: 10px;
+  background: var(--cs-surface-3);
+}
+.context__text { font-size: 15px; font-weight: 300; color: var(--cs-ink-2); }
+.context__text strong { font-weight: 600; color: var(--cs-primary); }
+.context__link { margin-left: auto; font-size: 14px; font-weight: 300; }
+
+/* ---- Recommendation ---- */
+
+.rec { display: flex; flex-direction: column; gap: 26px; }
+.rec__head > .eyebrow { display: block; margin-bottom: 8px; }
+.rec__title {
+  font-size: clamp(26px, 2.1vw, 40px);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--cs-ink);
+  margin: 0 0 12px;
+}
+/* Capped for readability: a lead paragraph the full width of a large card would
+   be far past a comfortable measure. */
+.rec__overview { max-width: min(88ch, 100%); }
+.rec__grid {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: clamp(22px, 2vw, 40px);
+  align-items: start;
+}
+.rec__side { display: flex; flex-direction: column; gap: 22px; }
+
+.prose {
+  font-size: clamp(16px, 1.05vw, 19px);
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--cs-ink-2);
+}
+.prose p { margin: 0 0 14px; }
+.prose > :last-child { margin-bottom: 0; }
+.prose strong { font-weight: 600; color: var(--cs-ink); }
+.prose h3, .prose h4, .prose h5 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--cs-ink);
+  margin: 20px 0 8px;
+  line-height: 1.2;
+}
+.prose ul, .prose ol { margin: 0 0 14px; padding-left: 22px; }
+.prose li { margin-bottom: 6px; }
+.prose code, .alert code {
+  font-family: var(--cs-font-mono);
+  background: var(--cs-accent-soft);
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: var(--cs-accent);
+}
+.prose code { font-size: 0.9em; }
+.prose pre {
+  margin: 0 0 14px;
+  padding: 16px;
+  background: var(--cs-surface-3);
+  border: 1px solid var(--cs-line);
+  border-radius: 10px;
+  overflow-x: auto;
+}
+.prose pre code { background: none; padding: 0; font-size: 12.5px; line-height: 1.7; }
+.prose table { border-collapse: collapse; width: 100%; margin: 0 0 14px; font-size: 15px; }
+.prose th, .prose td {
+  text-align: left;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--cs-line);
+}
+.prose th { font-weight: 600; color: var(--cs-ink); background: var(--cs-surface-3); }
+
+.section-title {
+  font-size: clamp(19px, 1.35vw, 25px);
+  font-weight: 700;
+  color: var(--cs-ink);
+  margin: 0 0 12px;
+}
+
+/* ---- Services table ---- */
+
+.services { border: 1px solid var(--cs-line); border-radius: 10px; overflow: hidden; }
+.services__row { display: grid; grid-template-columns: 1.1fr 0.9fr; }
+.services__head {
+  background: var(--cs-surface-3);
+  border-bottom: 1px solid var(--cs-line);
+  padding: 10px 16px;
+}
+.services__body { padding: 13px 16px; border-bottom: 1px solid var(--cs-line); }
+.services__body:last-child { border-bottom: none; }
+.services__name { font-size: 15px; font-weight: 600; color: var(--cs-ink); }
+.services__reason {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--cs-ink-3);
+  margin-top: 2px;
+}
+.services__purpose {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--cs-ink-2);
+  padding-left: 14px;
+}
+
+/* ---- Well-Architected notes ---- */
+
+.notes { display: flex; flex-direction: column; gap: 8px; }
+
+.note {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 11px 13px;
+  border: 1px solid var(--cs-line);
+  border-radius: 8px;
+}
+.note--review { border-color: rgba(217, 119, 6, 0.35); background: rgba(217, 119, 6, 0.05); }
+
+/* An anchor to the framework's page for this pillar since F6, so the underline
+   and the visited colour go: it is a badge that happens to be clickable. */
+.pillar {
+  flex: 0 0 auto;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  padding: 2px 8px;
+  color: var(--cs-success);
+  border: 1px solid rgba(31, 157, 85, 0.35);
+  background: rgba(31, 157, 85, 0.08);
+  text-decoration: none;
+  white-space: nowrap;
+}
+a.pillar:hover { border-color: var(--cs-success); }
+a.pillar:focus-visible { outline: none; box-shadow: var(--cs-focus-ring); }
+
+/* How many of the six pillars a reply spoke to, beside the heading (F6). */
+.coverage {
+  margin-left: 10px;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  color: var(--cs-ink-3);
+}
+.note--review .pillar {
+  color: var(--cs-warning);
+  border-color: rgba(217, 119, 6, 0.4);
+  background: #fff;
+}
+.note__text { font-size: 14px; font-weight: 300; line-height: 1.5; color: var(--cs-ink-2); }
+
+/* ---- Cost ---- */
+
+/* ============================================================
+   What it costs: one element (F1, F12)
+
+   There were two of these. An accented panel carrying the tier the model guessed,
+   and this card carrying what the AWS Price List said. They are one now, and the
+   card is what survived: quiet, in the neutral palette, because a figure that
+   can be checked does not need to shout, and because 700-weight numerals over an
+   11.5px mono breakdown is a contrast fight a gradient loses.
+
+   The accent goes on .estimate__band alone -- the one part of this element that
+   is a judgement about magnitude rather than an amount.
+   ============================================================ */
+
+/* Held open for a figure that has not arrived yet; see estimateSlot(). */
+.estimate-slot:empty { display: none; }
+
+.estimate {
+  border: 1px solid var(--cs-line);
+  border-radius: 12px;
+  padding: clamp(18px, 1.4vw, 26px) clamp(20px, 1.6vw, 30px);
+  background: var(--cs-surface-3);
+}
+.estimate__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.estimate__total {
+  font-size: clamp(26px, 2vw, 38px);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--cs-ink);
+  font-variant-numeric: tabular-nums;
+}
+.estimate__total--small { font-size: clamp(20px, 1.4vw, 26px); }
+.estimate__meta {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--cs-ink-3);
+  margin-top: 8px;
+}
+.estimate__flag {
+  margin-top: 12px;
+  padding: 10px 14px;
+  border-left: 3px solid var(--cs-warning);
+  background: var(--cs-surface);
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--cs-ink-2);
+}
+.estimate__flag strong { font-weight: 600; }
+.estimate__lines { margin-top: 16px; display: flex; flex-direction: column; gap: 2px; }
+.estimate__line {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 10px;
+  border-top: 1px solid var(--cs-line);
+}
+.estimate__line:first-child { border-top: 0; padding-top: 0; }
+.estimate__name { font-size: 15px; font-weight: 600; color: var(--cs-ink); }
+.estimate__amount {
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--cs-ink-2);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.estimate__line--unpriced .estimate__name,
+.estimate__line--unpriced .estimate__amount { color: var(--cs-ink-3); font-weight: 300; }
+.estimate__sub {
+  font-family: var(--cs-font-mono);
+  font-size: 11.5px;
+  color: var(--cs-ink-3);
+  padding-bottom: 8px;
+}
+.estimate__pending { display: flex; align-items: center; gap: 10px; }
+/* In a comparison column there is room for the figure and nothing else. */
+.estimate--compact { padding: 16px 18px; }
+
+/* The figure and its band, kept on one baseline so they read as one statement
+   rather than a number with a label after it. */
+.estimate__figure { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.estimate__band {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--cs-primary);
+  white-space: nowrap;
+}
+
+/* The advisor's own read, kept because it is worth reading and demoted because
+   it is not the answer. */
+.estimate__aside {
+  margin-top: 12px;
+  font-size: 13.5px;
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--cs-ink-3);
+}
+
+/* Styled as the diagram-source toggle is, because it does the same job. */
+.estimate__toggle {
+  margin-top: 16px;
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--cs-primary);
+  cursor: pointer;
+  text-align: left;
+}
+.estimate__toggle:hover { text-decoration: underline; }
+
+/* An estimated line is dimmer than a priced one and darker than one with no
+   figure at all: three states, three weights, no legend needed. */
+.estimate__line--estimated .estimate__amount { color: var(--cs-ink-3); font-style: italic; }
+.estimate__flag--stale { border-left-color: var(--cs-primary); }
+
+/* ---- Assumptions (F10) ---- */
+
+/* Above the services, where the field sits in the schema: what the sizing rests
+   on, before the sizing. Bordered rather than filled, because it is the reader's
+   working surface and not a callout -- the amber notice above the thread is what
+   carries the weight once something here has been corrected. */
+.assumptions {
+  border: 1px solid var(--cs-line);
+  border-radius: 12px;
+  padding: 18px 20px;
+}
+.assumptions__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 10px;
+}
+.assumptions__head .section-title { margin: 0; }
+.assumptions__meta { font-size: 13px; font-weight: 300; color: var(--cs-ink-3); }
+
+.assumptions__list { list-style: none; margin: 0; padding: 0; }
+
+/* The row is a grid so the buttons hold one column and the text takes the rest,
+   which keeps every Edit in the panel on the same vertical line however long the
+   sentence beside it runs. */
+.assumption {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: 4px 16px;
+  padding: 9px 0;
+  border-top: 1px solid var(--cs-line);
+}
+.assumption:first-child { border-top: none; }
+
+.assumption__text {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.55;
+  color: var(--cs-ink-2);
+}
+/* The original, under the rewrite. A correction that hides what it corrected is
+   not something a reviewer can check. */
+.assumption__was {
+  grid-column: 1;
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--cs-ink-3);
+  text-decoration: line-through;
+}
+.assumption--changed .assumption__text { color: var(--cs-ink); font-weight: 600; }
+
+.assumption__actions { display: flex; gap: 12px; }
+.assumption__btn {
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--cs-accent);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: var(--cs-line-strong);
+  text-underline-offset: 3px;
+}
+.assumption__btn:hover { color: var(--cs-primary); text-decoration-color: var(--cs-primary); }
+.assumption__btn:disabled { color: var(--cs-ink-3); cursor: default; text-decoration: none; }
+
+.assumption--editing { grid-template-columns: 1fr; }
+.assumption__input {
+  width: 100%;
+  padding: 9px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--cs-primary);
+  background: var(--cs-surface);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--cs-ink);
+}
+.assumption__input:focus { outline: none; box-shadow: var(--cs-focus-ring); }
+
+/* ---- Diagram ---- */
+
+.diagram__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+.diagram__head .section-title { margin: 0; }
+.diagram__meta { font-size: 13px; font-weight: 300; color: var(--cs-ink-3); }
+/* The caption and the two downloads, at the right-hand end of the head (F7).
+   Wraps rather than squeezing the caption out on a narrow card. */
+.diagram__actions {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 4px 14px;
+}
+
+.diagram {
+  border: 1px solid var(--cs-line);
+  border-radius: 12px;
+  background: var(--cs-surface-3);
+  padding: clamp(24px, 2.4vh, 40px) clamp(22px, 1.8vw, 36px);
+  overflow-x: auto;
+}
+/* Scale a wide graph down to fit rather than clipping it, but stop shrinking at
+   a width where the labels are still readable and let the card scroll instead.
+   Auto side margins centre a graph narrower than the card, and collapse to zero
+   when it is wider, so scrolling still starts at the first node. */
+.diagram svg {
+  display: block;
+  width: 100%;
+  /* Grows into a wide card, but never past 1.35x the size the graph was laid out
+     at, so a small diagram does not balloon. --natural-width comes from app.js. */
+  max-width: min(100%, calc(var(--natural-width, 100%) * 1.35));
+  min-width: 560px;
+  height: auto;
+  margin-inline: auto;
+}
+
+.diagram__toggle,
+.diagram__file {
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--cs-accent);
+  background: none;
+  border: none;
+  padding: 0;
+  margin-top: 12px;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: var(--cs-line-strong);
+  text-underline-offset: 4px;
+  align-self: flex-start;
+}
+.diagram__toggle:hover,
+.diagram__file:hover { color: var(--cs-primary); text-decoration-color: var(--cs-primary); }
+/* Smaller than the source toggle: these sit up in the head beside the caption,
+   not under the card as a line of their own. */
+.diagram__file { font-size: 13px; margin: 0; }
+
+.source {
+  margin-top: 12px;
+  border: 1px solid var(--cs-line);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.source__head {
+  padding: 10px 16px;
+  background: var(--cs-surface-3);
+  border-bottom: 1px solid var(--cs-line);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--cs-ink-2);
+}
+.source pre {
+  margin: 0;
+  padding: 16px;
+  font-family: var(--cs-font-mono);
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: var(--cs-accent);
+  background: #fff;
+  overflow: auto;
+}
+
+/* ---- Thinking / suggestions ---- */
+
+.thinking { flex: 1; display: flex; align-items: center; gap: 10px; padding-top: 6px; }
+.thinking__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  display: inline-block;
+  animation: pulse 1.4s var(--cs-ease) infinite;
+}
+.thinking__dot:nth-child(1) { background: var(--cs-primary); opacity: 0.9; }
+.thinking__dot:nth-child(2) { background: var(--cs-secondary); opacity: 0.6; animation-delay: 0.18s; }
+.thinking__dot:nth-child(3) { background: var(--cs-accent-muted); opacity: 0.4; animation-delay: 0.36s; }
+.thinking__label { font-size: 15px; font-weight: 300; color: var(--cs-ink-3); margin-left: 6px; }
+/* A line of Claude's own reasoning, shown while it works. It changes as the
+   model thinks, so it is held to one line: a wrapping, reflowing block of text
+   under a progress indicator reads as a fault rather than as progress. */
+.thinking__note {
+  flex: 1;
+  min-width: 0;
+  font-size: 13px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--cs-ink-3);
+  opacity: 0.75;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* Inside a comparison column the dots sit above the note rather than beside it,
+   because a column is far too narrow to read a line of reasoning across. */
+.option .thinking { flex-wrap: wrap; }
+.option .thinking__note { flex-basis: 100%; margin-left: 0; }
+
+@keyframes pulse {
+  0%, 100% { transform: translateY(0); opacity: 0.35; }
+  50% { transform: translateY(-3px); opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .thinking__dot { animation: none; }
+  .btn:hover:not(:disabled), .example:hover { transform: none; }
+}
+
+/* Where the architecture has to run, and what it has to satisfy (F5). The
+   first select elements in the app; they sit above the composer because they
+   describe the work rather than the question. */
+.constraints { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: var(--cs-stack); }
+.constraints__select {
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--cs-ink-2);
+  background: var(--cs-surface);
+  border: 1px solid var(--cs-line-strong);
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+.constraints__select:hover { border-color: var(--cs-primary); }
+.constraints__select:focus-visible { outline: none; box-shadow: var(--cs-focus-ring); }
+.constraints__select:disabled { opacity: 0.55; cursor: default; }
+
+/* No bottom margin: the composer's own top padding is the gap under these, and
+   a margin here reopened the band of empty space the Rebuild row used to fill. */
+.suggestions { display: flex; gap: 8px; flex-wrap: wrap; padding-left: 44px; }
+#suggestions:empty { display: none; }
+.suggestion {
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--cs-ink-2);
+  background: transparent;
+  border: 1px solid var(--cs-line-strong);
+  border-radius: 999px;
+  padding: 7px 14px;
+  cursor: pointer;
+  transition: border-color 200ms var(--cs-ease), color 200ms var(--cs-ease);
+}
+.suggestion:hover { border-color: var(--cs-primary); color: var(--cs-primary); }
+
+/* ---- Composer ---- */
+
+/* Sticks to the bottom of the scrolling view, so it stays reachable however
+   long the conversation gets. */
+.composer {
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+  border-top: 1px solid var(--cs-line);
+  padding: 22px 0 var(--cs-stack);
+  margin-top: auto;
+  background: var(--cs-surface);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+/* Left of the input, so the question is sandwiched between Rebuild and Send.
+   `flex: 0 0 auto` because it must not grow, and the input takes what is left. */
+.composer__rebuild { flex: 0 0 auto; }
+
+.composer__input {
+  flex: 1;
+  min-width: 0;
+  padding: 14px 16px;
+  border: 1px solid var(--cs-line-strong);
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--cs-ink);
+  background: #fff;
+  transition: border-color 180ms var(--cs-ease);
+}
+.composer__input::placeholder { color: var(--cs-ink-3); }
+.composer__input:focus { border-color: var(--cs-primary); outline: none; box-shadow: var(--cs-focus-ring); }
+
+/* ============================================================
+   Compare
+   ============================================================ */
+
+.compare__title {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--cs-ink);
+  margin: 0 0 8px;
+}
+.compare__lead {
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--cs-ink-2);
+  margin: 0;
+  max-width: 70ch;
+}
+
+.compare__inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+/* Three and four briefs still fit side by side; the columns just get narrower.
+   The textareas are short, so this reads better than a scroller would (F9). */
+.compare__inputs--3 { grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.compare__inputs--4 { grid-template-columns: repeat(2, 1fr); }
+
+.field { border: 1px solid var(--cs-line); border-radius: 10px; padding: 16px; }
+.field:focus-within { border-color: var(--cs-primary); box-shadow: var(--cs-focus-ring); }
+.field > .eyebrow { display: block; margin-bottom: 8px; }
+.field textarea {
+  width: 100%;
+  border: none;
+  padding: 0;
+  resize: vertical;
+  min-height: 104px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--cs-ink);
+  background: transparent;
+}
+.field textarea:focus { outline: none; }
+.field textarea::placeholder { color: var(--cs-ink-3); }
+
+.compare__actions { display: flex; justify-content: flex-end; }
+.rule { height: 1px; background: var(--cs-line); }
+
+/* Every option shares the grid's rows, so headings, service lists, notes and
+   cost cards line up across the columns however uneven the content is.
+   That alignment is what `display: contents` on .option buys, and the price of
+   it is that there is no per-column box -- so a comparison too wide for the
+   viewport is scrolled by the wrapper below rather than by a column. */
+.compare__scroll { overflow-x: auto; }
+.compare__results {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 24px;
+  row-gap: 16px;
+  align-items: start;
+}
+/* Three or four columns need a floor, or the services table and the diagram
+   become unreadable before the scrollbar ever appears (F9). */
+.compare__results--3 { grid-template-columns: repeat(3, minmax(260px, 1fr)); column-gap: 18px; }
+.compare__results--4 { grid-template-columns: repeat(4, minmax(240px, 1fr)); column-gap: 16px; }
+.option { display: contents; }
+/* Set inline by optionColumn, because which column this is depends on the
+   reply and `display: contents` leaves nothing to hang a class on. */
+.option > * { grid-column: var(--option-column, 1); }
+.option > *:nth-child(1) { grid-row: 1; }
+.option > *:nth-child(2) { grid-row: 2; }
+.option > *:nth-child(3) { grid-row: 3; }
+.option > *:nth-child(4) { grid-row: 4; }
+/* Five, since F12 merged the cost tier and the priced figure into one child. */
+.option > *:nth-child(5) { grid-row: 5; }
+.compare__results--3 .option__name,
+.compare__results--4 .option__name { font-size: 15px; }
+.option__head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.option__badge {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--cs-secondary);
+  border-radius: 999px;
+  padding: 3px 10px;
+}
+.option__name { font-size: 17px; font-weight: 600; color: var(--cs-ink); }
+.option__summary {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--cs-ink-2);
+  margin: 0;
+}
+.option__summary p { margin: 0 0 10px; }
+.option__summary > :last-child { margin-bottom: 0; }
+
+.stack { border: 1px solid var(--cs-line); border-radius: 10px; overflow: hidden; }
+.stack__row {
+  padding: 10px 14px;
+  font-size: 14px;
+  border-bottom: 1px solid var(--cs-line);
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+.stack__row:last-child { border-bottom: none; }
+.stack__name { font-weight: 600; color: var(--cs-ink); }
+.stack__purpose { font-weight: 300; color: var(--cs-ink-3); text-align: right; }
+
+.note-lines { display: flex; flex-direction: column; gap: 6px; }
+.note-line { display: flex; gap: 8px; align-items: baseline; }
+.note-line__pillar {
+  flex: 0 0 auto;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--cs-success);
+}
+.note-line--review .note-line__pillar { color: var(--cs-warning); }
+a.note-line__pillar { text-decoration: none; }
+a.note-line__pillar:hover { text-decoration: underline; }
+a.note-line__pillar:focus-visible { outline: none; box-shadow: var(--cs-focus-ring); }
+.note-line__text { font-size: 14px; font-weight: 300; color: var(--cs-ink-2); }
+
+/* ============================================================
+   Alerts and toast
+   ============================================================ */
+
+.alerts { display: flex; flex-direction: column; gap: 16px; }
+
+.alert {
+  border: 1px solid var(--cs-line);
+  border-radius: 12px;
+  padding: 24px 26px;
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+}
+.alert__bar { flex: 0 0 6px; align-self: stretch; background: var(--cs-line-strong); border-radius: 999px; }
+.alert__body { flex: 1; min-width: 0; }
+.alert__title { font-size: 18px; font-weight: 700; color: var(--cs-ink); margin: 0 0 6px; }
+.alert__text {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--cs-ink-2);
+  margin: 0;
+  max-width: 70ch;
+}
+.alert__text + .alert__actions { margin-top: 14px; }
+.alert__actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.alert code { font-size: 14px; }
+
+.alert--danger { border-color: rgba(192, 57, 43, 0.35); background: rgba(192, 57, 43, 0.04); }
+.alert--danger .alert__bar { background: var(--cs-danger); }
+.alert--danger .alert__title { color: var(--cs-danger); }
+
+.alert--warning { border-color: rgba(217, 119, 6, 0.4); background: rgba(217, 119, 6, 0.05); }
+.alert--warning .alert__bar { background: var(--cs-warning); }
+.alert--warning .alert__title { color: var(--cs-warning); }
+
+.setup {
+  margin-top: 14px;
+  border: 1px solid var(--cs-line);
+  border-radius: 10px;
+  background: #fff;
+  padding: 16px 18px;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--cs-ink-2);
+  max-height: 340px;
+  overflow-y: auto;
+}
+.setup pre { white-space: pre-wrap; }
+
+.toast-rail {
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  transform: translateX(-50%);
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: min(680px, calc(100vw - 48px));
+}
+
+.toast {
+  padding: 18px 22px;
+  border-radius: 10px;
+  background: var(--cs-secondary);
+  box-shadow: 0 18px 40px rgba(38, 38, 38, 0.28);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  animation: rise 240ms var(--cs-ease);
+}
+.toast__text { font-size: 15px; font-weight: 300; color: #fff; }
+.toast__action {
+  margin-left: auto;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 7px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  transition: border-color 200ms var(--cs-ease);
+}
+.toast__action:hover { border-color: #fff; }
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) { .toast { animation: none; } }
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+/* ============================================================
+   The export dialog (F3)
+
+   The only modal in the app. It is a real <dialog>-shaped overlay rather than a
+   panel in the sidebar because choosing formats, naming a client and reading the
+   filename back is a task with an end: you finish it and get a file.
+   ============================================================ */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(38, 38, 38, 0.42);
+  overflow-y: auto;
+}
+
+.dialog {
+  width: 100%;
+  max-width: 640px;
+  background: var(--cs-surface);
+  border-radius: var(--cs-shell-radius);
+  box-shadow: var(--cs-shadow-lg);
+  overflow: hidden;
+  margin: auto;
+}
+
+.dialog__head { padding: 24px 28px 18px; border-bottom: 1px solid var(--cs-line); }
+.dialog__title {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--cs-ink);
+  margin: 8px 0 0;
+}
+.dialog__lead {
+  margin: 8px 0 0;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--cs-ink-2);
+}
+.dialog__body { padding: 20px 28px; display: flex; flex-direction: column; gap: 10px; }
+.dialog__foot {
+  padding: 16px 28px;
+  border-top: 1px solid var(--cs-line);
+  background: var(--cs-surface-3);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.dialog__name {
+  flex: 1 1 22ch;
+  min-width: 0;
+  font-family: var(--cs-font-mono);
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--cs-ink-3);
+  overflow-wrap: anywhere;
+}
+
+/* What the deliverable covers: the architecture, its shape, and whether the
+   conversation has moved on since it was written. Sits above the formats,
+   because what you are exporting matters more than which files it comes in. */
+.subject {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 15px 17px;
+  border: 1px solid var(--cs-line);
+  border-radius: 10px;
+  background: var(--cs-surface-3);
+}
+.subject__headline {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--cs-ink);
+}
+.subject__facts {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--cs-ink-3);
+}
+.subject__option {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--cs-ink);
+}
+.subject__label {
+  flex: 0 0 auto;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--cs-primary);
+}
+.subject__title { flex: 1 1 auto; min-width: 0; }
+.subject__figure {
+  flex: 0 0 auto;
+  font-variant-numeric: tabular-nums;
+  color: var(--cs-ink-2);
+}
+
+/* A note about the deliverable, one per line, marked by what it is. Its own
+   grid rather than a flex row so a wrapped sentence stays clear of the icon. */
+.subject__note {
+  display: grid;
+  grid-template-columns: 16px 1fr;
+  align-items: baseline;
+  gap: 9px;
+  margin: 3px 0 0;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--cs-ink-2);
+}
+.subject__icon { font-size: 13px; line-height: 1.5; }
+.subject__note--ok .subject__icon { color: var(--cs-success); }
+.subject__note--info .subject__icon { color: var(--cs-ink-3); }
+.subject__note--info { color: var(--cs-ink-3); }
+
+/* Out of date. The one thing in this dialog that can send a client the wrong
+   architecture, so it stops looking like a footnote: its own panel, in the
+   danger colour, with the action as a button rather than words in a sentence. */
+.subject__stale {
+  margin: 9px -6px -6px;
+  padding: 12px 14px;
+  border-radius: 9px;
+  border: 1px solid var(--cs-danger);
+  background: rgba(192, 57, 43, 0.07);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+}
+.subject__stale-body { flex: 1 1 15ch; min-width: 0; }
+.subject__stale-title {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0 0 2px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--cs-danger);
+}
+.subject__stale-text {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--cs-ink-2);
+}
+
+/* The action on the stale panel. Solid rather than outlined, because it is the
+   thing to do rather than one option among three, and in the danger colour so it
+   reads as part of the warning rather than as a link in the text beside it. */
+.btn--warn {
+  flex: 0 0 auto;
+  background: var(--cs-danger);
+  border-color: var(--cs-danger);
+  color: #FFFFFF;
+  white-space: nowrap;
+}
+.btn--warn:hover:not(:disabled) { background: #A93226; border-color: #A93226; }
+
+.btn--danger {
+  color: var(--cs-danger);
+  border-color: rgba(192, 57, 43, 0.45);
+}
+.btn--danger:hover:not(:disabled) { border-color: var(--cs-danger); }
+
+.dialog--narrow { max-width: 460px; }
+
+.eyebrow--danger { color: var(--cs-danger); }
+
+/* One format. The checkbox itself is the input; the box beside it is what you
+   see, which keeps the whole row clickable and the keyboard behaviour native. */
+.format {
+  display: flex;
+  gap: 13px;
+  align-items: flex-start;
+  padding: 13px 15px;
+  border: 1px solid var(--cs-line);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: border-color 220ms var(--cs-ease), background 220ms var(--cs-ease);
+}
+.format:hover { border-color: var(--cs-line-strong); }
+.format input { position: absolute; opacity: 0; width: 0; height: 0; }
+.format__box {
+  flex: 0 0 18px;
+  height: 18px;
+  margin-top: 2px;
+  border: 1px solid var(--cs-line-strong);
+  border-radius: 5px;
+  background: var(--cs-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: transparent;
+}
+.format__name { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.format__label { font-size: 15px; font-weight: 600; color: var(--cs-ink); }
+.format__file { font-family: var(--cs-font-mono); font-size: 12px; color: var(--cs-ink-3); }
+.format__hint {
+  display: block;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--cs-ink-2);
+  margin-top: 3px;
+}
+
+.format.is-on { border-color: var(--cs-primary); background: rgba(26, 26, 26, 0.04); }
+.format.is-on .format__box {
+  background: var(--cs-primary);
+  border-color: var(--cs-primary);
+  color: #fff;
+}
+.format input:focus-visible + .format__box { box-shadow: var(--cs-focus-ring); }
+.format.is-off { opacity: 0.6; cursor: not-allowed; }
+.format.is-off .format__label { color: var(--cs-ink-2); }
+
+.dialog__fields { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 6px; }
+.dialog__field {
+  border: 1px solid var(--cs-line);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+.dialog__field:focus-within { border-color: var(--cs-primary); box-shadow: var(--cs-focus-ring); }
+.dialog__field .eyebrow { display: block; margin-bottom: 6px; }
+.dialog__field input {
+  width: 100%;
+  border: none;
+  padding: 0;
+  background: transparent;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--cs-ink);
+}
+.dialog__field input:focus { outline: none; }
+.dialog__field input::placeholder { color: var(--cs-ink-3); }
+
+.toggles { display: flex; flex-direction: column; gap: 9px; margin-top: 4px; }
+.toggle {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--cs-ink-2);
+}
+.toggle input { position: absolute; opacity: 0; width: 0; height: 0; }
+.toggle__track {
+  flex: 0 0 34px;
+  height: 19px;
+  border-radius: 999px;
+  background: var(--cs-line-strong);
+  position: relative;
+  transition: background 220ms var(--cs-ease);
+}
+.toggle__track::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 15px;
+  height: 15px;
+  border-radius: 999px;
+  background: #fff;
+  transition: transform 220ms var(--cs-ease);
+}
+.toggle input:checked + .toggle__track { background: var(--cs-primary); }
+.toggle input:checked + .toggle__track::after { transform: translateX(15px); }
+.toggle input:focus-visible + .toggle__track { box-shadow: var(--cs-focus-ring); }
+
+.dialog__note {
+  margin: 0;
+  padding: 10px 14px;
+  border-left: 3px solid var(--cs-warning);
+  background: var(--cs-surface-3);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--cs-ink-2);
+}
+.dialog__note--error { border-left-color: var(--cs-danger); }
+
+@media (max-width: 1160px) {
+  .rec__grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 1000px) {
+  /* Stacked, so the card grows with its content and the page scrolls again
+     rather than the two panels scrolling inside a viewport-height frame. */
+  .page { padding: 16px; align-items: flex-start; }
+  .shell { flex-direction: column; height: auto; min-height: 0; }
+  .sidebar { flex: 0 0 auto; gap: 20px; overflow: visible; }
+  /* Stacked, so the buttons follow the list rather than being pushed to an edge
+     that is no longer there. */
+  .sidebar__actions { margin-top: 0; }
+  .main { min-height: 0; }
+  .view { padding: 24px 22px 32px; overflow-y: visible; }
+  .composer { position: static; padding-bottom: 0; flex-wrap: wrap; }
+  /* Wrapped, the two buttons share a line under the input rather than the
+     input being squeezed to nothing between them. */
+  .composer__input { flex: 1 1 100%; order: -1; }
+  .topbar { padding: 14px 22px; flex-wrap: wrap; gap: 12px; }
+  .compare__inputs,
+  .compare__inputs--3,
+  .compare__inputs--4 { grid-template-columns: 1fr; }
+  /* Stacked, so drop the shared row tracks and let each option flow on its own.
+     Nothing scrolls sideways here, so the wrapper stops being one. */
+  .compare__scroll { overflow-x: visible; }
+  .compare__results,
+  .compare__results--3,
+  .compare__results--4 { display: flex; flex-direction: column; gap: 28px; }
+  .option { display: flex; flex-direction: column; gap: 16px; }
+  .option > * { grid-column: auto; grid-row: auto; }
+  .sidebar__section--scroll { flex: 0 0 auto; }
+  .sidebar__section--scroll .sessions { max-height: 300px; }
+  /* The sidebar spans the full width here, so stop the logo growing with it. */
+  .sidebar__logo { max-width: 236px; }
+  /* Keep diagram labels at full size and scroll the card instead of shrinking
+     the graph into illegibility in a narrow column. */
+  .diagram svg { max-width: none; min-width: 0; }
+  .welcome { padding: 30px 26px; }
+  .welcome__title { font-size: 32px; }
+  .rec__title { font-size: 26px; }
+  .suggestions { padding-left: 0; }
+}
+
+@media (max-width: 620px) {
+  .dialog__fields { grid-template-columns: 1fr; }
+  .dialog__head, .dialog__body, .dialog__foot { padding-left: 20px; padding-right: 20px; }
+  .services__row { grid-template-columns: 1fr; gap: 6px; }
+  .services__purpose { padding-left: 0; }
+  .services__head { display: none; }
+  .msg { gap: 10px; }
+  .stack__row { flex-direction: column; gap: 2px; }
+  .stack__purpose { text-align: left; }
+}

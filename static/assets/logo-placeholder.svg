@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 96" role="img" aria-label="Insert logo">
+  <!-- Placeholder for the company logo. Replace this file with your own, keeping
+       the name, and the app, the exported HTML and the PDF all follow. Every
+       place this is drawn sits on a dark background (the sidebar gradient and
+       the export cover, hero and footer), so it is drawn in light ink. -->
+  <title>Insert logo</title>
+  <rect x="2" y="2" width="416" height="92" rx="10"
+        fill="none" stroke="#C8C8C8" stroke-width="2" stroke-dasharray="9 7" opacity="0.75"/>
+  <text x="210" y="48" text-anchor="middle" dominant-baseline="middle"
+        font-family="system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif"
+        font-size="30" font-weight="600" letter-spacing="3.5" fill="#F2F2F2">INSERT LOGO</text>
+  <text x="210" y="74" text-anchor="middle" dominant-baseline="middle"
+        font-family="system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif"
+        font-size="12" font-weight="400" letter-spacing="1.6" fill="#B4B4B4">static/assets/logo-placeholder.svg</text>
+</svg>

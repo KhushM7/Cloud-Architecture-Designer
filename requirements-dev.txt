@@ -1,0 +1,12 @@
+# Development tools. The app itself needs only requirements.txt.
+#   pip install -r requirements.txt -r requirements-dev.txt
+-r requirements.txt
+
+pytest==9.1.1
+ruff==0.16.3
+mypy==2.3.1
+pre-commit==4.4.0
+
+# Only the browser suite (tests/test_ui.py, marked `slow`) needs this: it drives
+# headless Chrome over the DevTools protocol rather than installing Selenium.
+websockets==16.1.1

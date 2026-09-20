@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Architecture Advisor · Insert Company Name</title>
+<meta name="description" content="Describe a workload in plain English and get a reviewed AWS architecture, Well-Architected notes and a cost tier.">
+<link rel="icon" type="image/svg+xml" href="assets/mark-placeholder.svg">
+<!-- The weights on the first screen, fetched alongside the stylesheet rather than
+     waiting for it to parse. -->
+<link rel="preload" href="assets/fonts/ibm-plex-sans-condensed-300-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/ibm-plex-sans-condensed-600-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/ibm-plex-sans-condensed-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+<!-- The palette, generated from branding.py. It defines the custom properties
+     app.css reads, so it has to arrive first. -->
+<link rel="stylesheet" href="brand.css">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<div class="page">
+  <div class="shell">
+
+    <aside class="sidebar">
+      <img class="sidebar__logo" src="assets/logo-placeholder.svg" alt="Insert Company Name">
+
+      <div class="sidebar__section sidebar__section--single">
+        <span class="eyebrow eyebrow--primary">This session</span>
+        <div class="sessions" id="sessions"></div>
+      </div>
+
+      <div class="sidebar__section sidebar__section--scroll">
+        <span class="eyebrow eyebrow--primary">Saved</span>
+        <!-- The search box lives here rather than inside #saved-list, because
+             that list is rebuilt on every render and an input inside it would
+             lose focus on each keystroke (F8). -->
+        <label class="sr-only" for="saved-search">Search saved conversations</label>
+        <input class="rename search" id="saved-search" autocomplete="off"
+               placeholder="Search saved conversations">
+        <div class="filters" id="saved-filters"></div>
+        <div class="sessions" id="saved-list"></div>
+      </div>
+
+      <div class="sidebar__actions">
+        <button class="btn btn--primary btn--block btn--sm" id="export-btn">Export deliverable</button>
+        <button class="btn btn--ghost-light btn--block btn--sm" id="save-btn">Save conversation to JSON</button>
+        <button class="btn btn--ghost-light btn--block btn--sm" id="clear-btn">Clear session</button>
+        <button class="btn btn--ghost-light btn--block btn--sm" id="usage-btn">What this has cost</button>
+      </div>
+
+      <div class="saved" id="saved" hidden>
+        <div class="saved__title">Saved</div>
+        <div class="saved__path" id="saved-path"></div>
+      </div>
+
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <div class="tabs" role="tablist">
+          <button class="tab is-active" id="tab-advisor" role="tab" aria-selected="true">Advisor</button>
+          <button class="tab" id="tab-compare" role="tab" aria-selected="false">Compare</button>
+        </div>
+        <div class="topbar__meta">
+          <span class="topbar__model" id="model-label">claude-sonnet-5</span>
+        </div>
+      </div>
+
+      <section class="view" id="advisor-view" role="tabpanel" aria-labelledby="tab-advisor"></section>
+      <section class="view view--compare" id="compare-view" role="tabpanel" aria-labelledby="tab-compare" hidden></section>
+    </main>
+
+  </div>
+</div>
+
+<div class="toast-rail" id="toasts" aria-live="polite"></div>
+
+<!-- The export dialog (F3). Rendered by app.js from state, like every other view. -->
+<div id="export-dialog"></div>
+<div id="discard-dialog"></div>
+<!-- The spend view over the ledger (F14). -->
+<div id="usage-dialog"></div>
+
+<script src="app.js"></script>
+</body>
+</html>

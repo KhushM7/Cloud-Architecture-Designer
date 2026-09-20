@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Insert logo mark">
+  <!-- Placeholder for the company mark: the favicon, and the small avatar beside
+       every advisor turn in the conversation. Both of those sit on a light
+       background, so this one is a dark tile with light initials. Replace the
+       file, keep the name. -->
+  <title>Insert logo mark</title>
+  <rect x="0" y="0" width="64" height="64" rx="12" fill="#1A1A1A"/>
+  <text x="32" y="34" text-anchor="middle" dominant-baseline="middle"
+        font-family="system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif"
+        font-size="26" font-weight="700" letter-spacing="1" fill="#F2F2F2">IL</text>
+</svg>

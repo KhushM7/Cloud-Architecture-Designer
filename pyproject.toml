@@ -1,0 +1,86 @@
+# Tooling configuration. Runtime dependencies stay in requirements.txt, which is
+# what the README tells you to install; the dev tools are in requirements-dev.txt.
+# Nothing here packages the project -- it runs from the repo root, so there is no
+# [project] table that would have to be kept in step with requirements.txt.
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests"]
+# advisor.py and friends sit in the repo root rather than in a package.
+pythonpath = ["."]
+# The browser suite needs Chrome and a free port, so it stays out of the default
+# run. Use `pytest -m slow` for it alone, or `pytest -m ""` for everything.
+addopts = "-ra --strict-markers -m 'not slow and not network'"
+markers = [
+    "slow: drives a real browser over the DevTools protocol",
+    "network: reads the real AWS Price List, to check it has not changed shape",
+]
+
+[tool.ruff]
+# The existing code wraps at around 90 to 100 characters; this keeps the
+# formatter from rewrapping most of the project on its first run.
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = [
+    "F",   # pyflakes: unused imports and names, real bugs
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "I",   # import sorting
+    "UP",  # pyupgrade: outdated syntax for the target version
+    "B",   # bugbear: mutable defaults, silent excepts, loop-variable capture
+    "A",   # builtin shadowing -- one of the things PyCharm flagged
+    "C4",  # comprehension rewrites
+    "SIM", # simplifiable branches and context managers
+    "RUF", # ruff's own checks
+]
+
+[tool.ruff.lint.per-file-ignores]
+# The en dashes are load-bearing: the advisor writes cost tiers as "Low–Medium"
+# and ranges as "£150–400", so the schema, the patterns that read the old
+# Markdown, and the examples in the field descriptions all contain the real
+# character.
+"schema.py" = ["RUF001"]
+"migrate.py" = ["RUF001", "RUF002"]
+# The console has to be reconfigured to UTF-8 before rich is imported, so those
+# imports cannot come first. The reason is in a comment at the top of the file.
+"main.py" = ["E402"]
+# The tests build long, realistic Markdown replies -- en dashes and all --
+# because they stand in for what the advisor actually writes.
+"tests/*" = ["E501", "RUF001", "RUF002"]
+
+[tool.mypy]
+python_version = "3.13"
+# Everything, including export.py and terraform.py. They were left out of this
+# list once and it did not mean what it looked like: server.py imports export,
+# mypy follows imports, and export.py was analysed anyway -- so the exclusion
+# hid six real errors rather than skipping them. Naming them here costs one
+# annotation and makes `mypy` mean what the README says it means.
+files = [
+    "advisor.py",
+    "export.py",
+    "main.py",
+    "migrate.py",
+    "parse.py",
+    "schema.py",
+    "server.py",
+    "store.py",
+    "terraform.py",
+    "tests",
+]
+# Non-strict: no annotations are demanded, but the ones that exist are checked,
+# and so are the bodies of functions that have none.
+check_untyped_defs = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_unused_configs = true
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+# The test fakes stand in for SDK objects deliberately: a FakeClient is not an
+# Anthropic and a stub response is not a Message. The bodies are still checked;
+# only the complaints about those substitutions are turned off.
+module = "tests.*"
+disable_error_code = ["arg-type", "index"]
